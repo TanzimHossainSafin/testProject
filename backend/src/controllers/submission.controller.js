@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const { Submission, SubmissionStatus, Task, TaskStatus, Project, UserRole } = require('../models');
+const { Submission, SubmissionStatus, Task, TaskStatus, Project, ProjectStatus, UserRole } = require('../models');
 const { createError } = require('../utils/ApiError');
 const { asyncHandler } = require('../utils/asyncHandler');
 const config = require('../config');
@@ -102,9 +102,11 @@ const reviewSubmission = asyncHandler(async (req, res) => {
     throw createError(404, 'Project not found');
   }
 
-  // Only buyer can review
-  if (!project.buyerId.equals(req.user._id)) {
-    throw createError(403, 'Only buyer can review submissions');
+  // Only buyer or admin can review
+  const isReviewerBuyer = project.buyerId.equals(req.user._id);
+  const isReviewerAdmin = req.user.role === UserRole.ADMIN;
+  if (!isReviewerBuyer && !isReviewerAdmin) {
+    throw createError(403, 'Only buyer or admin can review submissions');
   }
 
   if (submission.status !== SubmissionStatus.PENDING) {
@@ -136,7 +138,7 @@ const reviewSubmission = asyncHandler(async (req, res) => {
     });
 
     if (incompleteTasks === 0) {
-      project.status = 'completed';
+      project.status = ProjectStatus.COMPLETED;
       await project.save();
     }
   }

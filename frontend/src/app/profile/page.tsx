@@ -87,7 +87,7 @@ export default function ProfilePage() {
       <motion.div variants={container} initial="hidden" animate="show" className="max-w-3xl mx-auto">
         <motion.div variants={item} className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Profile</h1>
-          <p className="text-gray-600 mt-1">Manage your profile information</p>
+          <p className="text-gray-800 mt-1">Manage your profile information</p>
         </motion.div>
 
         {/* Profile Header */}
@@ -100,7 +100,7 @@ export default function ProfilePage() {
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900">{user?.name}</h2>
-                  <div className="flex items-center gap-2 text-gray-500 mt-1">
+                  <div className="flex items-center gap-2 text-gray-700 mt-1">
                     <Mail className="w-4 h-4" />
                     <span>{user?.email}</span>
                   </div>
@@ -162,7 +162,7 @@ export default function ProfilePage() {
                     value={formData.skills}
                     onChange={(e) => setFormData({ ...formData, skills: e.target.value })}
                   />
-                  <p className="text-xs text-gray-500 mt-1">Separate skills with commas</p>
+                  <p className="text-xs text-gray-700 mt-1">Separate skills with commas</p>
                 </div>
 
                 <Textarea
@@ -205,14 +205,14 @@ export default function ProfilePage() {
                 <div className="space-y-4">
                   {formData.bio && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-500 mb-1">About</h4>
+                      <h4 className="text-sm font-medium text-gray-700 mb-1">About</h4>
                       <p className="text-gray-900">{formData.bio}</p>
                     </div>
                   )}
 
                   {formData.skills && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-500 mb-2">Skills</h4>
+                      <h4 className="text-sm font-medium text-gray-700 mb-2">Skills</h4>
                       <div className="flex flex-wrap gap-2">
                         {formData.skills.split(',').map((skill, index) => (
                           skill.trim() && (
@@ -230,7 +230,7 @@ export default function ProfilePage() {
 
                   {formData.experience && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-500 mb-1 flex items-center gap-1">
+                      <h4 className="text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
                         <Briefcase className="w-4 h-4" />
                         Experience
                       </h4>
@@ -240,7 +240,7 @@ export default function ProfilePage() {
 
                   {formData.portfolio && (
                     <div>
-                      <h4 className="text-sm font-medium text-gray-500 mb-1 flex items-center gap-1">
+                      <h4 className="text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
                         <LinkIcon className="w-4 h-4" />
                         Portfolio
                       </h4>

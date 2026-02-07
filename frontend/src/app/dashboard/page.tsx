@@ -123,7 +123,7 @@ export default function DashboardPage() {
           <h1 className="text-2xl font-bold text-gray-900">
             Welcome back, {user?.name}
           </h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-800 mt-1">
             Here&apos;s what&apos;s happening with your projects
           </p>
         </motion.div>
@@ -134,7 +134,7 @@ export default function DashboardPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Total Projects</p>
+                  <p className="text-sm text-gray-700">Total Projects</p>
                   <p className="text-3xl font-bold text-gray-900">{stats?.projects || 0}</p>
                 </div>
                 <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
@@ -149,7 +149,7 @@ export default function DashboardPage() {
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm text-gray-500">Total Users</p>
+                    <p className="text-sm text-gray-700">Total Users</p>
                     <p className="text-3xl font-bold text-gray-900">{stats?.users || 0}</p>
                   </div>
                   <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
@@ -164,7 +164,7 @@ export default function DashboardPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-700">
                     {user?.role === UserRole.PROBLEM_SOLVER ? 'My Pending' : 'Pending Requests'}
                   </p>
                   <p className="text-3xl font-bold text-gray-900">{stats?.pendingRequests || 0}</p>
@@ -180,7 +180,7 @@ export default function DashboardPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Completed</p>
+                  <p className="text-sm text-gray-700">Completed</p>
                   <p className="text-3xl font-bold text-gray-900">{stats?.completedProjects || 0}</p>
                 </div>
                 <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
@@ -207,7 +207,7 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent>
               {recentProjects.length === 0 ? (
-                <p className="text-gray-500 text-center py-8">No projects yet</p>
+                <p className="text-gray-700 text-center py-8">No projects yet</p>
               ) : (
                 <div className="space-y-4">
                   {recentProjects.map((project) => (
@@ -226,7 +226,7 @@ export default function DashboardPage() {
                           </div>
                           <div>
                             <p className="font-medium text-gray-900">{project.title}</p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-gray-700">
                               {typeof project.buyerId === 'object' ? (project.buyerId as User).name : 'Unknown'}
                             </p>
                           </div>

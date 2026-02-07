@@ -74,7 +74,7 @@ export default function RequestsPage() {
       case 'rejected':
         return <XCircle className="w-5 h-5 text-red-500" />;
       default:
-        return <FileText className="w-5 h-5 text-gray-500" />;
+        return <FileText className="w-5 h-5 text-gray-700" />;
     }
   };
 
@@ -83,7 +83,7 @@ export default function RequestsPage() {
       <motion.div variants={container} initial="hidden" animate="show">
         <motion.div variants={item} className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">My Requests</h1>
-          <p className="text-gray-600 mt-1">Track your project work requests</p>
+          <p className="text-gray-800 mt-1">Track your project work requests</p>
         </motion.div>
 
         {/* Stats */}
@@ -92,7 +92,7 @@ export default function RequestsPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Pending</p>
+                  <p className="text-sm text-gray-700">Pending</p>
                   <p className="text-2xl font-bold text-yellow-600">{pendingRequests.length}</p>
                 </div>
                 <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
@@ -105,7 +105,7 @@ export default function RequestsPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Accepted</p>
+                  <p className="text-sm text-gray-700">Accepted</p>
                   <p className="text-2xl font-bold text-green-600">{acceptedRequests.length}</p>
                 </div>
                 <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -118,7 +118,7 @@ export default function RequestsPage() {
             <CardContent className="pt-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">Rejected</p>
+                  <p className="text-sm text-gray-700">Rejected</p>
                   <p className="text-2xl font-bold text-red-600">{rejectedRequests.length}</p>
                 </div>
                 <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
@@ -133,7 +133,7 @@ export default function RequestsPage() {
         <motion.div variants={item}>
           {requests.length === 0 ? (
             <EmptyState
-              icon={<FileText className="w-8 h-8 text-gray-400" />}
+              icon={<FileText className="w-8 h-8 text-gray-600" />}
               title="No requests yet"
               description="When you request to work on projects, they will appear here"
               action={
@@ -187,7 +187,7 @@ export default function RequestsPage() {
                                   >
                                     {formatStatus(request.status)}
                                   </span>
-                                  <span className="text-xs text-gray-500">
+                                  <span className="text-xs text-gray-700">
                                     Requested {formatDate(request.createdAt)}
                                   </span>
                                 </div>
@@ -206,7 +206,7 @@ export default function RequestsPage() {
                             )}
                           </div>
                           {request.message && (
-                            <p className="mt-3 text-sm text-gray-600 pl-16">{request.message}</p>
+                            <p className="mt-3 text-sm text-gray-800 pl-16">{request.message}</p>
                           )}
                         </CardContent>
                       </Card>

@@ -58,7 +58,7 @@ export default function LoginPage() {
             <span className="text-white font-bold text-2xl">M</span>
           </motion.div>
           <h1 className="text-2xl font-bold text-gray-900">Welcome back</h1>
-          <p className="text-gray-600 mt-1">Sign in to your account</p>
+          <p className="text-gray-800 mt-1">Sign in to your account</p>
         </div>
 
         <Card>
@@ -100,7 +100,7 @@ export default function LoginPage() {
               </Button>
             </form>
 
-            <div className="mt-6 text-center text-sm text-gray-600">
+            <div className="mt-6 text-center text-sm text-gray-800">
               Don&apos;t have an account?{' '}
               <Link href="/register" className="text-indigo-600 hover:text-indigo-700 font-medium">
                 Sign up
@@ -109,7 +109,7 @@ export default function LoginPage() {
           </CardContent>
         </Card>
 
-        <p className="mt-6 text-center text-xs text-gray-500">
+        <p className="mt-6 text-center text-xs text-gray-700">
           Demo admin: admin@marketplace.com / admin123
         </p>
       </motion.div>

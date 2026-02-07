@@ -49,7 +49,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex items-center gap-2">
               <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
-                <User className="w-4 h-4 text-gray-600" />
+                <User className="w-4 h-4 text-gray-800" />
               </div>
               <div className="text-sm">
                 <p className="font-medium text-gray-900">{user.name}</p>

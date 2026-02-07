@@ -253,18 +253,16 @@ export default function ProjectDetailPage() {
   // Check if current user is the buyer of this project
   // Backend populates buyerId, so it comes as object with _id field
   // User object has id field (from auth)
-  const getBuyerId = (buyerId: User | string): string | null => {
-    if (typeof buyerId === 'string') return buyerId;
-    if (typeof buyerId === 'object') {
-      return (buyerId as any)._id || (buyerId as any).id || null;
-    }
-    return null;
+  const extractId = (ref: User | string | any): string => {
+    if (!ref) return '';
+    if (typeof ref === 'string') return ref;
+    return String(ref._id || ref.id || '');
   };
 
-  const buyerId = getBuyerId(project.buyerId);
-  const solverId = project.assignedSolverId ? getBuyerId(project.assignedSolverId) : null;
-  const userId = user?.id || (user as any)?._id;
-  
+  const buyerId = extractId(project.buyerId);
+  const solverId = project.assignedSolverId ? extractId(project.assignedSolverId) : null;
+  const userId = String(user?.id || (user as any)?._id || '');
+
   // According to PDF: Only Buyer can accept/reject requests
   const isBuyer = user?.role === UserRole.BUYER && buyerId === userId;
   const isSolver = user?.role === UserRole.PROBLEM_SOLVER && solverId === userId;
@@ -279,7 +277,7 @@ export default function ProjectDetailPage() {
         <div className="mb-6">
           <Link
             href="/projects"
-            className="inline-flex items-center text-sm text-gray-500 hover:text-gray-700 mb-4"
+            className="inline-flex items-center text-sm text-gray-700 hover:text-gray-700 mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-1" />
             Back to Projects
@@ -293,7 +291,7 @@ export default function ProjectDetailPage() {
                   {formatStatus(project.status)}
                 </span>
               </div>
-              <p className="text-gray-600">{project.description}</p>
+              <p className="text-gray-800">{project.description}</p>
             </div>
 
             {isSolver && (project.status === 'assigned' || project.status === 'in_progress') && (
@@ -310,9 +308,9 @@ export default function ProjectDetailPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="flex items-center gap-3 mb-4">
-                <UserIcon className="w-5 h-5 text-gray-400" />
+                <UserIcon className="w-5 h-5 text-gray-600" />
                 <div>
-                  <p className="text-sm text-gray-500">Buyer</p>
+                  <p className="text-sm text-gray-700">Buyer</p>
                   <p className="font-medium">
                     {typeof project.buyerId === 'object' ? (project.buyerId as User).name : 'Unknown'}
                   </p>
@@ -322,7 +320,7 @@ export default function ProjectDetailPage() {
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <div>
-                    <p className="text-sm text-gray-500">Assigned To</p>
+                    <p className="text-sm text-gray-700">Assigned To</p>
                     <p className="font-medium">
                       {typeof project.assignedSolverId === 'object'
                         ? (project.assignedSolverId as User).name
@@ -338,10 +336,10 @@ export default function ProjectDetailPage() {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex items-center gap-3">
-                  <DollarSign className="w-5 h-5 text-gray-400" />
+                  <DollarSign className="w-5 h-5 text-gray-600" />
                   <div>
-                    <p className="text-sm text-gray-500">Budget</p>
-                    <p className="font-medium text-lg">${project.budget.toLocaleString()}</p>
+                    <p className="text-sm text-gray-700">Budget</p>
+                    <p className="font-medium text-lg">{project.budget.toLocaleString()} TK</p>
                   </div>
                 </div>
               </CardContent>
@@ -352,9 +350,9 @@ export default function ProjectDetailPage() {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex items-center gap-3">
-                  <Calendar className="w-5 h-5 text-gray-400" />
+                  <Calendar className="w-5 h-5 text-gray-600" />
                   <div>
-                    <p className="text-sm text-gray-500">Deadline</p>
+                    <p className="text-sm text-gray-700">Deadline</p>
                     <p className="font-medium">{formatDate(project.deadline)}</p>
                   </div>
                 </div>
@@ -370,7 +368,7 @@ export default function ProjectDetailPage() {
               <h2 className="text-lg font-semibold">Requirements</h2>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 whitespace-pre-wrap">{project.requirements}</p>
+              <p className="text-gray-800 whitespace-pre-wrap">{project.requirements}</p>
             </CardContent>
           </Card>
         )}
@@ -410,13 +408,13 @@ export default function ProjectDetailPage() {
                                 ? (request.solverId as User).name
                                 : 'Unknown'}
                             </p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-sm text-gray-700">
                               {typeof request.solverId === 'object'
                                 ? (request.solverId as User).email
                                 : ''}
                             </p>
                             {request.message && (
-                              <p className="text-sm text-gray-600 mt-1">{request.message}</p>
+                              <p className="text-sm text-gray-800 mt-1">{request.message}</p>
                             )}
                           </div>
                         </div>
@@ -442,7 +440,7 @@ export default function ProjectDetailPage() {
                           </div>
                         )}
                         {isAdmin && (
-                          <div className="text-sm text-gray-500 italic">
+                          <div className="text-sm text-gray-700 italic">
                             Only buyer can accept/reject requests
                           </div>
                         )}
@@ -462,7 +460,7 @@ export default function ProjectDetailPage() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold">Tasks</h2>
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-gray-700">
                     {tasks.filter((t) => t.status === TaskStatus.COMPLETED).length} / {tasks.length} completed
                   </div>
                 </div>
@@ -470,7 +468,7 @@ export default function ProjectDetailPage() {
               <CardContent>
                 {tasks.length === 0 ? (
                   <EmptyState
-                    icon={<FileText className="w-8 h-8 text-gray-400" />}
+                    icon={<FileText className="w-8 h-8 text-gray-600" />}
                     title="No tasks yet"
                     description={
                       isSolver
@@ -504,7 +502,7 @@ export default function ProjectDetailPage() {
                                   {task.status === TaskStatus.COMPLETED ? (
                                     <CheckCircle className="w-4 h-4 text-green-600" />
                                   ) : (
-                                    <span className="text-sm font-medium text-gray-600">
+                                    <span className="text-sm font-medium text-gray-800">
                                       {index + 1}
                                     </span>
                                   )}
@@ -512,7 +510,7 @@ export default function ProjectDetailPage() {
                                 <div>
                                   <h3 className="font-medium text-gray-900">{task.title}</h3>
                                   {task.description && (
-                                    <p className="text-sm text-gray-500 mt-1">{task.description}</p>
+                                    <p className="text-sm text-gray-700 mt-1">{task.description}</p>
                                   )}
                                   <div className="flex items-center gap-4 mt-2">
                                     <span
@@ -523,7 +521,7 @@ export default function ProjectDetailPage() {
                                       {formatStatus(task.status)}
                                     </span>
                                     {task.deadline && (
-                                      <span className="text-xs text-gray-500 flex items-center gap-1">
+                                      <span className="text-xs text-gray-700 flex items-center gap-1">
                                         <Clock className="w-3 h-3" />
                                         {formatDate(task.deadline)}
                                       </span>
@@ -537,11 +535,11 @@ export default function ProjectDetailPage() {
                                     {task.status !== TaskStatus.SUBMITTED && (
                                       <Button
                                         size="sm"
-                                        variant="outline"
+                                        variant={task.status === TaskStatus.REVISION_REQUESTED ? 'primary' : 'outline'}
                                         onClick={() => openSubmitModal(task)}
                                       >
                                         <Upload className="w-4 h-4 mr-1" />
-                                        Submit
+                                        {task.status === TaskStatus.REVISION_REQUESTED ? 'Resubmit' : 'Submit'}
                                       </Button>
                                     )}
                                     {task.status === TaskStatus.TODO && (
@@ -571,12 +569,22 @@ export default function ProjectDetailPage() {
                                     className="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-200"
                                   >
                                     <div className="flex items-center gap-3">
-                                      <FileText className="w-5 h-5 text-gray-400" />
+                                      <FileText className="w-5 h-5 text-gray-600" />
                                       <div>
                                         <p className="text-sm font-medium">{sub.fileName}</p>
-                                        <p className="text-xs text-gray-500">
+                                        <p className="text-xs text-gray-700">
                                           {formatFileSize(sub.fileSize)} • {formatDateTime(sub.createdAt)}
                                         </p>
+                                        {sub.reviewNotes && sub.status === SubmissionStatus.REJECTED && (
+                                          <p className="text-xs text-red-600 mt-1">
+                                            Feedback: {sub.reviewNotes}
+                                          </p>
+                                        )}
+                                        {sub.reviewNotes && sub.status === SubmissionStatus.APPROVED && (
+                                          <p className="text-xs text-green-600 mt-1">
+                                            Note: {sub.reviewNotes}
+                                          </p>
+                                        )}
                                       </div>
                                     </div>
                                     <div className="flex items-center gap-2">
@@ -587,14 +595,19 @@ export default function ProjectDetailPage() {
                                       >
                                         {formatStatus(sub.status)}
                                       </span>
-                                      <a
-                                        href={submissionApi.getDownloadUrl(sub._id)}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
+                                      <button
+                                        onClick={async () => {
+                                          try {
+                                            await submissionApi.download(sub._id, sub.fileName);
+                                          } catch (error) {
+                                            console.error('Download failed:', error);
+                                          }
+                                        }}
                                         className="p-1.5 rounded hover:bg-gray-100"
+                                        title="Download file"
                                       >
-                                        <Download className="w-4 h-4 text-gray-500" />
-                                      </a>
+                                        <Download className="w-4 h-4 text-gray-700" />
+                                      </button>
                                       {(isBuyer || isAdmin) && sub.status === SubmissionStatus.PENDING && (
                                         <Button size="sm" onClick={() => openReviewModal(sub)}>
                                           Review
@@ -657,7 +670,7 @@ export default function ProjectDetailPage() {
       {/* Submit Work Modal */}
       <Modal isOpen={showSubmitModal} onClose={() => setShowSubmitModal(false)} title="Submit Work">
         <form onSubmit={handleSubmitWork} className="space-y-4">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-800">
             Submitting for: <strong>{selectedTask?.title}</strong>
           </p>
           <Textarea
@@ -681,7 +694,7 @@ export default function ProjectDetailPage() {
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
               required
             />
-            <p className="text-xs text-gray-500 mt-1">Only ZIP files are allowed (max 50MB)</p>
+            <p className="text-xs text-gray-700 mt-1">Only ZIP files are allowed (max 50MB)</p>
           </div>
           <div className="flex justify-end gap-3 pt-4">
             <Button type="button" variant="outline" onClick={() => setShowSubmitModal(false)}>
@@ -698,7 +711,7 @@ export default function ProjectDetailPage() {
       {/* Review Submission Modal */}
       <Modal isOpen={showReviewModal} onClose={() => setShowReviewModal(false)} title="Review Submission">
         <form onSubmit={handleReviewSubmission} className="space-y-4">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-800">
             Reviewing: <strong>{selectedSubmission?.fileName}</strong>
           </p>
           <div>

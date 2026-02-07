@@ -71,7 +71,7 @@ export default function RegisterPage() {
             <span className="text-white font-bold text-2xl">M</span>
           </motion.div>
           <h1 className="text-2xl font-bold text-gray-900">Create an account</h1>
-          <p className="text-gray-600 mt-1">Join as a Problem Solver</p>
+          <p className="text-gray-800 mt-1">Join as a Problem Solver</p>
         </div>
 
         <Card>
@@ -133,7 +133,7 @@ export default function RegisterPage() {
               </Button>
             </form>
 
-            <div className="mt-6 text-center text-sm text-gray-600">
+            <div className="mt-6 text-center text-sm text-gray-800">
               Already have an account?{' '}
               <Link href="/login" className="text-indigo-600 hover:text-indigo-700 font-medium">
                 Sign in

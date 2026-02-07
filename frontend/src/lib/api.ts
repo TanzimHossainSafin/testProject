@@ -27,9 +27,9 @@ api.interceptors.response.use(
         window.location.href = '/login';
       }
     }
-    // Log 403 errors for debugging
+    // Log 403 errors for debugging (use warn to avoid Next.js error overlay)
     if (error.response?.status === 403) {
-      console.error('403 Forbidden:', {
+      console.warn('403 Forbidden:', {
         url: error.config?.url,
         method: error.config?.method,
         message: error.response?.data?.message,
@@ -104,6 +104,19 @@ export const submissionApi = {
     api.patch(`/submissions/${submissionId}/review`, data),
   getDownloadUrl: (submissionId: string) =>
     `${API_URL}/submissions/${submissionId}/download`,
+  download: async (submissionId: string, fileName: string) => {
+    const response = await api.get(`/submissions/${submissionId}/download`, {
+      responseType: 'blob',
+    });
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', fileName);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  },
 };
 
 export default api;

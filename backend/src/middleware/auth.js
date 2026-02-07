@@ -29,7 +29,7 @@ const protect = asyncHandler(async (req, res, next) => {
 const authorize = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      throw createError(403, 'Not authorized to perform this action');
+      return next(createError(403, 'Not authorized to perform this action'));
     }
     next();
   };

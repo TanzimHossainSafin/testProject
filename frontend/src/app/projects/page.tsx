@@ -162,7 +162,7 @@ export default function ProjectsPage() {
         <motion.div variants={item} className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Projects</h1>
-            <p className="text-gray-600 mt-1">
+            <p className="text-gray-800 mt-1">
               {user?.role === UserRole.BUYER
                 ? 'Manage your projects'
                 : user?.role === UserRole.PROBLEM_SOLVER
@@ -218,7 +218,7 @@ export default function ProjectsPage() {
 
         {projects.length === 0 ? (
           <EmptyState
-            icon={<FolderKanban className="w-8 h-8 text-gray-400" />}
+            icon={<FolderKanban className="w-8 h-8 text-gray-600" />}
             title="No projects yet"
             description={
               user?.role === UserRole.BUYER
@@ -263,12 +263,12 @@ export default function ProjectsPage() {
                       <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">
                         {project.title}
                       </h3>
-                      <p className="text-sm text-gray-500 mb-4 line-clamp-2">
+                      <p className="text-sm text-gray-700 mb-4 line-clamp-2">
                         {project.description}
                       </p>
 
                       <div className="space-y-2 mb-4">
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
                           <UserIcon className="w-4 h-4" />
                           <span>
                             {typeof project.buyerId === 'object'
@@ -277,15 +277,15 @@ export default function ProjectsPage() {
                           </span>
                         </div>
                         {project.deadline && (
-                          <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <div className="flex items-center gap-2 text-sm text-gray-700">
                             <Calendar className="w-4 h-4" />
                             <span>{formatDate(project.deadline)}</span>
                           </div>
                         )}
                         {project.budget && (
-                          <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <div className="flex items-center gap-2 text-sm text-gray-700">
                             <DollarSign className="w-4 h-4" />
-                            <span>${project.budget.toLocaleString()}</span>
+                            <span>{project.budget.toLocaleString()} TK</span>
                           </div>
                         )}
                       </div>
