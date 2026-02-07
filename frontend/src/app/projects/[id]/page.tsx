@@ -28,7 +28,6 @@ import { formatDate, formatDateTime, formatStatus, getStatusColor, formatFileSiz
 import {
   ArrowLeft,
   Calendar,
-  DollarSign,
   User as UserIcon,
   CheckCircle,
   XCircle,
@@ -336,7 +335,7 @@ export default function ProjectDetailPage() {
             <Card>
               <CardContent className="pt-6">
                 <div className="flex items-center gap-3">
-                  <DollarSign className="w-5 h-5 text-gray-600" />
+                  <span className="w-5 h-5 flex items-center justify-center font-bold text-sm text-gray-600">TK</span>
                   <div>
                     <p className="text-sm text-gray-700">Budget</p>
                     <p className="font-medium text-lg">{project.budget.toLocaleString()} TK</p>

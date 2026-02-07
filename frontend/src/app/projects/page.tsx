@@ -18,7 +18,6 @@ import {
   Plus,
   FolderKanban,
   Calendar,
-  DollarSign,
   User as UserIcon,
   ArrowRight,
 } from 'lucide-react';
@@ -284,8 +283,8 @@ export default function ProjectsPage() {
                         )}
                         {project.budget && (
                           <div className="flex items-center gap-2 text-sm text-gray-700">
-                            <DollarSign className="w-4 h-4" />
-                            <span>{project.budget.toLocaleString()} TK</span>
+                            <span className="font-semibold text-xs">TK</span>
+                            <span>{project.budget.toLocaleString()}</span>
                           </div>
                         )}
                       </div>
