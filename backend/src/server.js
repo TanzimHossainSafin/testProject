@@ -9,7 +9,10 @@ const { errorHandler } = require('./middleware/errorHandler');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,6 +36,13 @@ app.use((req, res) => {
 });
 
 const startServer = async () => {
+  // Ensure uploads directory exists
+  const fs = require('fs');
+  const uploadDir = path.join(__dirname, '../uploads');
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+  }
+
   await connectDatabase();
 
   app.listen(config.port, () => {
