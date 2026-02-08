@@ -4,6 +4,15 @@ A full-stack role-based project marketplace where **Buyers** create projects, **
 
 ---
 
+## 🚀 Live Deployment
+
+| Component | URL |
+|-----------|-----|
+| **Backend API** | [https://marketplace-backend-h7vq.onrender.com](https://marketplace-backend-h7vq.onrender.com) |
+| **Frontend Application** | [https://test-project-fsanpr6ak-tanzim-safins-projects.vercel.app/login](https://test-project-fsanpr6ak-tanzim-safins-projects.vercel.app/login) |
+
+**Quick Start:** Visit the [Frontend Application](https://test-project-fsanpr6ak-tanzim-safins-projects.vercel.app/login) to access the system. The [Backend API](https://marketplace-backend-h7vq.onrender.com) powers all requests.
+
 ## System Overview
 
 ### Role Hierarchy
